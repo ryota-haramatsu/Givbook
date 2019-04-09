@@ -1,0 +1,14 @@
+body {
+    font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic'; 
+
+}
+/* .header,
+.section,
+.footer {
+ margin-bottom: 20px; 
+} */
+.top-img {
+    background:url(../img/book-2160539_960_720.png)center top/cover no-repeat; 
+    opacity: 0.5;
+    max-width: 100%;
+}
