@@ -9,6 +9,19 @@ body {
 } */
 .top-img {
     background:url(../img/book-2160539_960_720.png)center top/cover no-repeat; 
-    opacity: 0.5;
     max-width: 100%;
+}
+
+.btn {
+    color: white;
+    font-size: 20px;
+    font-family: helvetica;
+    text-decoration: none;
+    border: 2px solid white;
+    border-radius: 20px;
+    transition-duration: .2s;
+    -webkit-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    background-color: black;
+    padding: 4px 30px;
 }

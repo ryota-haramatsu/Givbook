@@ -22,10 +22,13 @@ class BookRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required',
-            'comment' => 'required',
-            'img' =>  'required|file|image',
-        ];
+        // return [
+        //     'title' => 'required',
+        //     'comment' => 'required',
+        //     'img' =>  'required|file|image',
+        // ];
+
+       
+        
     }
 }

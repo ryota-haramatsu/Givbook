@@ -7,18 +7,32 @@ use App\Book;
 use App\Http\Requests\BookRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+    public function index(Request $request)
     {
-        $books = Book::latest('created_at')->get();
-        return view('index', compact('books'));
+        dd($request);
+        $books = Book::latest('created_at')->paginate(10);
+        $books->load('user');
+    
+        $keyword = $request->input('keyword');
+        $results = Book::where('title','like','%'.$keyword.'%')->get();  
+        
+        return view('index')->with('books',$books)->with('keyword',$keyword)->with('results',$results);
     }
 
     /**
@@ -26,8 +40,10 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
+
         return view('create');
     }
 
@@ -37,11 +53,31 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookRequest $request)
+    public function store(Request $request)
     {
+        $rules = [    
+            'title' => 'required',
+            'comment' => 'required',
+            'image' => 'required|file',
+        ];
+        $validated = $this->validate($request, $rules);  
+ 
 
-       Auth::user()->books()->create($request->validated());
-       return redirect('books')->with('message', '本を登録しました。');
+       if ($request->file('image')->isValid()) {
+           $book = new Book;
+        
+           $book->title = $request->title;
+           $book->comment = $request->comment;
+           $book->user_id = $request->user_id;
+           
+           $filename = $request->file('image')->store('public/upload');
+        
+           $book->image = basename($filename);
+           $book->save();
+       }
+    
+         return redirect(url('books'))->with('message', '本を追加しました。');
+
     }
 
     /**
@@ -53,8 +89,10 @@ class BooksController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
- 
-        return view('user', compact('user'));   
+
+        $count = Book::count();
+        
+        return view('user', compact('user','count'));   
     }
 
     /**
@@ -66,7 +104,6 @@ class BooksController extends Controller
     public function edit($id)
     {
         $book = Book::findOrFail($id);
-
         return view('edit', compact('book'));
     
     }
@@ -78,13 +115,15 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BookRequest $request, $id)
+    public function update(Request $request)
     {
-        $book = Book::findOrFail($id);
-
-        $book->update($request->validated());
-
-        return redirect(url('books', ['$book->id']));
+        $book = Book::findOrFail($request->book_id);
+        $book->title = $request->title;
+        $book->comment = $request->comment;
+        $book->image = $request->image;
+        $book->fill($request->all())->save();
+        return view('books.index')->with('update_message','本を修正しました。');
+        
     }
 
     /**
@@ -95,6 +134,8 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::find($id);
+        $book->delete();
+        return redirect('books')->with('delete_message','本を削除しました。');
     }
 }

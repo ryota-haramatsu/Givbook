@@ -11,6 +11,16 @@ class BooksTabelSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('books')->delete(); // ①
+ 
+        $faker = Faker::create('en_US'); // ②
+ 
+        for ($i = 0; $i < 10; $i++) {    // ③
+            Book::create([
+                'title' => $faker->sentence(),
+                'comment' => $faker->paragraph(),
+                // 'image' => 
+            ]);
     }
+}
 }

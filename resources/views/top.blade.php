@@ -22,7 +22,7 @@
         そんな感動を味わいませんか。</strong></p>
             <div class="text-center">
                 <a class="btn btn-success btn-lg d-inline-block" href="../auth/signin" role="button">GivBookをはじめる</a><br>
-                <a class="btn d-inline-block text-success" href="../auth/login" role="button">ログイン</a>
+                <a class="btn btn-primary btn-lg d-inline-block " href="../auth/login" role="button">ログイン</a>
             </div>
         </div>
     </div>
@@ -36,13 +36,13 @@
         </div>
         <div>
             <h2><u>ステップ1</u></h2>
-            <p>つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。（Wikipediaより）つれづれなるまゝに、日暮らし、硯にむかひて、</p>
+            <p>Facebook認証でログインを行いますので、Facebookアカウントをお持ちでない方は「GivBookをはじめる」ボタンを押す前に作成しておいてください。</p>
             <i class="fas fa-angle-double-down pl-4 display-4"></i>
             <h2><u>ステップ2</u></h2>
-            <p>つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。（Wikipediaより）つれづれなるまゝに、日暮らし、硯にむかひて、</p>
+            <p>GivBook内で他人があげたいと思った本のなかで興味をひく本があれば「気になる」ボタンを押してください。</p>
             <i class="fas fa-angle-double-down pl-4 display-4"></i>
             <h2><u>ステップ3</u></h2>
-            <p>つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。（Wikipediaより）つれづれなるまゝに、日暮らし、硯にむかひて、</p>
+            <p>ユーザー画面では気になった本のリストが作成されていますので、本が欲しかったり、交流をしたければFacebookでメッセージを送ってみると良いでしょう。</p>
             </div>
         <div class="text-center py-5">
             <a class="btn btn-success btn-lg d-inline-block" href="../auth/signin" role="button">GivBookをはじめる</a><br>

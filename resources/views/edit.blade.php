@@ -5,7 +5,7 @@
     <div class="text-center">
         
         <h2>-登録した本の修正-</h2>
-
+        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -15,23 +15,25 @@
                 </ul>
             </div>
         @endif
-
-        {!! Form::model($book, ['method' => 'PATCH', 'url' => ['books', '$book->id']]) !!}
-            <div class="form-group">
-                {!! Form::label('title', '本のタイトル') !!}
-                {!! Form::text('title', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('comment', 'コメント') !!}
-                {!! Form::textarea('comment', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('img', '画像') !!}
-                {!! Form::file('img', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::submit('本を編集する', ['class' => 'btn btn-primary form-control']) !!}
-            </div>
-        {!! Form::close() !!}
+        <div class="container border mb-4 bg-light">
+             <form class="form-group" action="{{ route('books.update', $book->id) }}" enctype="multipart/form-data" method="PUT">
+                <label for="">本のタイトル</label>
+                <div class="form-group">
+                    <input type="text" name="title" value="{{ $book->title }}">
+                </div>
+                <label for="">コメント</label>
+                <div class="form-group">
+                    <textarea name="comment" id="" cols="30" rows="3" placeholder="">{{ $book->comment }}</textarea>
+                </div>
+                <div class="form-group"> 
+                    <input type="file" name="image">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                </div>
+                <br>
+                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                <input type="submit"  value="修正する" class="btn btn-success rounded">
+            </form>
+        </div>
     </div>
 @endsection

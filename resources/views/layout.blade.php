@@ -12,6 +12,15 @@
 <body>
 
 <div class="container py-4"> 
+    @if(session('message'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+    @endif
+    @if(session('delete_message'))
+        <div class="alert alert-danger">{{ session('delete_message') }}</div>
+    @endif
+    @if(session('update_message'))
+        <div class="alert alert-primary">{{ session('update_message') }}</div>
+    @endif
     @yield('content')
 </div>
 </body>

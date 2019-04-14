@@ -11,12 +11,12 @@ class UsersTabelSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->delete();
-        // App\User::create([
-        //     'name' =>'root',
-        //     'email' => 'root@example.com',
-        //     'password' => Hash::make('password'),
-        //     'token' => 'hogehoge',
-        // ]);
+        DB::table('users')->delete();
+        App\User::create([
+            'name' =>'root',
+            'email' => 'root@example.com',
+            'password' => Hash::make('password'),
+            'token' => 'hogehoge',
+        ]);
     }
 }
