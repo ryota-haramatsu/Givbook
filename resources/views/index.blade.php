@@ -25,7 +25,7 @@
                         src="{{ url('storage/upload/'. $result->image) }}" alt="画像" >
                     </div>
                     <div class="col-lg-12 d-flex justify-content-center my-4"> 
-                            <button class="btn btn-danger text-light w-75">気になる</button>
+                            <button class="button text-light w-75">気になる</button>
                     </div>
                     <div class="row ml-3">
                         <h5>コメント</h5>
@@ -51,13 +51,10 @@
             <div class="row d-flex justify-content-center">
                 <div id="carouselExampleControls" class="carousel slide col-md-4" data-ride="carousel">
                     <div class="col-8-xs d-flex justify-content-center carousel-item active">
-                        <img class="d-block w-75 h-80" src="{{ url('storage/upload/'. $book->image) }}" alt="画像" >
+                        <img class="d-block w-75 mh-80" src="{{ url('storage/upload/'. $book->image) }}" alt="画像" >
                     </div>
                     <div class="col-lg-12 d-flex justify-content-center my-4"> 
-                        <!-- <form action="/books/user/{{ $book->user->id }}" method="get"> -->
-                            <button class="btn btn-danger text-light w-75 ">気になる</button>
-                            <!-- <input type="submit" value="気になる"> -->
-                        <!-- </form> -->
+                        <button class="button bg-success text-light w-75">メッセージを送る <i class="far fa-envelope"></i></button>
                     </div>
                     <div class="row ml-3">
                         <h5>コメント</h5>

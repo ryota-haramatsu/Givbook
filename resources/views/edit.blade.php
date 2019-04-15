@@ -16,7 +16,9 @@
             </div>
         @endif
         <div class="container border mb-4 bg-light">
-             <form class="form-group" action="{{ route('books.update', $book->id) }}" enctype="multipart/form-data" method="PUT">
+             <form class="form-group" action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
+             {{ csrf_field() }}
+             @method('PUT')
                 <label for="">本のタイトル</label>
                 <div class="form-group">
                     <input type="text" name="title" value="{{ $book->title }}">

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
+use App\Book;
 class UsersController extends Controller
 {
     /**
@@ -45,8 +46,12 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-
-        // return view('user');
+        
+        $user = User::findOrFail($id);
+        $books = Book::latest('created_at')->paginate(10);
+        // $count = Book::count();
+        
+        return view('user', compact('user','books'));   
     }
 
     /**
@@ -80,6 +85,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $book = Book::findOrFail($id);
+        // dd($book);
+        // $book->delete();
+        // return redirect('books')->with('delete_message','本を削除しました。');
     }
 }

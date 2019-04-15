@@ -11,7 +11,7 @@
               <a class="nav-link" href="/books/create">本の登録 <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('books/user/'.Auth::id()) }}">ユーザー</a>
+              <a class="nav-link" href="{{ url('users/'.Auth::id()) }}">ユーザー</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/">ログアウト</a>

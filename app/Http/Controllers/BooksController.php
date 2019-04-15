@@ -8,6 +8,7 @@ use App\Http\Requests\BookRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class BooksController extends Controller
 {
@@ -25,7 +26,6 @@ class BooksController extends Controller
     
     public function index(Request $request)
     {
-        dd($request);
         $books = Book::latest('created_at')->paginate(10);
         $books->load('user');
     
@@ -70,8 +70,9 @@ class BooksController extends Controller
            $book->comment = $request->comment;
            $book->user_id = $request->user_id;
            
-           $filename = $request->file('image')->store('public/upload');
-        
+           $time = Carbon::now();
+           $filename = $request->file('image')->storeAs('public/upload',$time.'_'.Auth::user()->id . '.jpg');
+
            $book->image = basename($filename);
            $book->save();
        }
@@ -88,11 +89,11 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        // $user = User::findOrFail($id);
 
-        $count = Book::count();
+        // $count = Book::count();
         
-        return view('user', compact('user','count'));   
+        // return view('user', compact('user','count'));   
     }
 
     /**
@@ -117,12 +118,22 @@ class BooksController extends Controller
      */
     public function update(Request $request)
     {
+        $rules = [    
+            'title' => 'required',
+            'comment' => 'required',
+            'image' => 'required|file',
+        ];
+
+        $validated = $this->validate($request, $rules);  
+        
         $book = Book::findOrFail($request->book_id);
         $book->title = $request->title;
         $book->comment = $request->comment;
-        $book->image = $request->image;
-        $book->fill($request->all())->save();
-        return view('books.index')->with('update_message','本を修正しました。');
+        $time = Carbon::now();
+        $filename = $request->file('image')->storeAs('public/upload',$time.'_'.Auth::user()->id . '.jpg');
+        $book->image = basename($filename);
+        $book->save();
+        return redirect('books')->with('update_message','本を修正しました。');
         
     }
 
@@ -134,7 +145,7 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::find($id);
+        $book = Book::findOrFail($id);
         $book->delete();
         return redirect('books')->with('delete_message','本を削除しました。');
     }

@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Book::class, 'user_id');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(\App\Message::class);
+    }
 }
