@@ -11,27 +11,18 @@
         <div class="text-left mb-3"><a href="books" class="text-dark"><i class="fas fa-angle-double-left"></i> 積読本一覧に戻る</a></div>
         <h4>検索結果</h4>
         @foreach($results as $result)
-        <div class="container mb-4 bg-light border-top">
-            <div class="row"> 
-                <p><i class="fas fa-user-alt ml-4 mt-3"></i> {{ optional($result->user)->name }}</p>
-            </div>
-            <div class="text-center"> 
-                <h4>{{ '〜'.$result->title.'〜' }}</h4>
-            </div>
-            <div class="row d-flex justify-content-center">
-                <div id="carouselExampleControls" class="carousel slide col-md-4" data-ride="carousel">
-                    <div class="col-8-xs d-flex justify-content-center carousel-item active">
-                        <img class="d-block w-75 h-80" 
-                        src="{{ url('storage/upload/'. $result->image) }}" alt="画像" >
+        <div class="container">
+            <div class="row d-flex justify-content-md-start justify-content-center">
+                <div class="card col-md-3" style="max-width: 16rem;">
+                    <div class="">
+                        <p><i class="fas fa-user-alt mt-3"></i> {{ $result->user->name }}</p>
                     </div>
-                    <div class="col-lg-12 d-flex justify-content-center my-4"> 
-                            <button class="button text-light w-75">気になる</button>
-                    </div>
-                    <div class="row ml-3">
+                    <h5 class="card-title">{{ $result->title }}</h5>
+                    <img class="card-img-top mt-2"  src="{{ url('storage/upload/'. $result->image) }}" alt="Card image cap">
+                    <div class="card-body">
+                    <button class="button mb-3">メッセージを送る</button>
                         <h5>コメント</h5>
-                    </div>
-                    <div class="row ml-4">
-                        <p>{{ $result->comment }}</p>
+                        <p class="card-text">{{ $result->comment }}</p>
                     </div>
                 </div>
             </div>
@@ -40,34 +31,26 @@
     @else
         <h4>積読本一覧</h4>
         <!-- 本の一覧 -->
-        @foreach($books as $book)
-        <div class="container mb-4 bg-light border-top">
-            <div class="row"> 
-                <p><i class="fas fa-user-alt ml-4 mt-3"></i> {{ optional($book->user)->name }}</p>
-            </div>
-            <div class="text-center"> 
-                <h4>{{ '〜'.$book->title.'〜' }}</h4>
-            </div>
-            <div class="row d-flex justify-content-center">
-                <div id="carouselExampleControls" class="carousel slide col-md-4" data-ride="carousel">
-                    <div class="col-8-xs d-flex justify-content-center carousel-item active">
-                        <img class="d-block w-75 mh-80" src="{{ url('storage/upload/'. $book->image) }}" alt="画像" >
+        <div class="container">
+            <div class="row d-flex justify-content-md-start justify-content-center">
+            @foreach($books as $book)
+                <div class="card col-md-3" style="max-width: 16rem;">
+                    <div class="">
+                        <p><i class="fas fa-user-alt mt-3"></i> {{ optional($book->user)->name }}</p>
                     </div>
-                    <div class="col-lg-12 d-flex justify-content-center my-4"> 
-                        <button class="button bg-success text-light w-75">メッセージを送る <i class="far fa-envelope"></i></button>
-                    </div>
-                    <div class="row ml-3">
+                    <h5 class="card-title">{{ $book->title }}</h5>
+                    <img class="card-img-top mt-2"  src="{{ url('storage/upload/'. $book->image) }}" alt="Card image cap">
+                    <div class="card-body">
+                        <button class="button mb-3"><a href="">メッセージを送る</a></button>
                         <h5>コメント</h5>
-                    </div>
-                    <div class="row ml-4">
-                        <p>{{ $book->comment }}</p>
+                        <p class="card-text">{{ $book->comment }}</p>
                     </div>
                 </div>
+            @endforeach
             </div>
         </div>
-        @endforeach
-        <div class="d-flex justify-content-center">
+        <!-- <div class="d-flex justify-content-center">
             {{ $books->links() }}
-        </div>
+        </div> -->
     @endif
 @endsection

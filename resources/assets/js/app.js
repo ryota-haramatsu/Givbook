@@ -6,45 +6,63 @@
  */
 
 require('./bootstrap');
-
+window.Vue = require('vue');
+import Vue from 'vue'
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll)
+// Vue.component('example', require('./components/Example.vue'));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('chat-messages', require('./components/ChatMessages.vue'));
-Vue.component('chat-form', require('./components/ChatForm.vue'));
+Vue.component('message', require('./components/message.vue'));
+// Vue.component('chat-form', require('./components/ChatForm.vue'));
+
 
 const app = new Vue({
     el: '#app',
     
     data: {
-        messages: []
-    },
-
-    created() {
-        this.fetchMessages();
-
-        Echo.private('chat')
-            .listen('MessageSent', (e) => {
-                this.messages.push({
-                    message: e.message.message,
-                    user: e.user
-                });
-            });
+        message: '',
+        chat:{
+            message:[],
+            user:[],
+            color:[]
+        }
     },
 
     methods: {
-        fetchMessages() {
-            axios.get('/messages').then(response => {
-                this.messages = response.data;
-            });
-        },
-        addMessage(message) {
-            this.messages.push(message);
+        send() {
+            if (this.message.length != 0) {
+                this.chat.message.push(this.message);
+                this.chat.color.push('success');
+                this.chat.user.push('you');
+                axios.post('/send', {
+                    
+                    message : this.message
 
-            axios.post('/messages', message).then(response => {});
+                  })
+                  .then(response => {
+                    console.log(response);
+                    this.message = ''
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  });
+                
+            }
         }
+    },
+
+    mounted() {
+        Echo.private('chat')
+             .listen('ChatEvent', (e) => {
+                 this.chat.message.push(e.message);
+                 this.chat.user.push(e.user);
+                 this.chat.color.push('warning');
+                // console.log(e);
+    });
     }
 });

@@ -32,7 +32,16 @@ Route::get('/auth/callback', 'Auth\SocialLiteController@callback');
 Route::resource('books','BooksController');
 Route::resource('users','UsersController')->only(['show']);
 
-Route::get('message', 'ChatsController@index');
-Route::get('messages', 'ChatsController@fetchMessages');
-Route::post('messages', 'ChatsController@sendMessage');
+Route::get('chat','ChatController@chat');
+Route::post('send','ChatController@send');
+// Route::get('messages', 'ChatsController@fetchMessages');
+// Route::post('messages', 'ChatsController@sendMessage');
 
+
+Auth::routes();
+
+// Route::get('/', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

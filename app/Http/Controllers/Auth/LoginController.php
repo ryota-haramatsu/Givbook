@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/auth/login';
 
     /**
      * Create a new controller instance.
@@ -46,6 +46,6 @@ class LoginController extends Controller
     public function handleProviderCallback()
 	{
 		$user = Socialite::driver('facebook')->user();
-		dd($user);
+		// dd($user);
 	}
 }
