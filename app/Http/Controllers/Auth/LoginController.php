@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/auth/login';
+    protected $redirectTo = 'books';
 
     /**
      * Create a new controller instance.
@@ -38,14 +38,14 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectToProvider()
-	{
-		return Socialite::driver('facebook')->redirect();
-    }
+    // public function redirectToProvider()
+	// {
+	// 	return Socialite::driver('facebook')->redirect();
+    // }
     
-    public function handleProviderCallback()
-	{
-		$user = Socialite::driver('facebook')->user();
-		// dd($user);
-	}
+    // public function handleProviderCallback()
+	// {
+	// 	$user = Socialite::driver('facebook')->user();
+
+	// }
 }

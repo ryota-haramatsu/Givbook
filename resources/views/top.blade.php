@@ -21,8 +21,8 @@
         誰かにとって大切な一冊になる。<br>
         そんな感動を味わいませんか。</strong></p>
             <div class="text-center">
-                <a class="btn btn-success btn-lg d-inline-block" href="../auth/signin" role="button">GivBookをはじめる</a><br>
-                <a class="btn btn-primary btn-lg d-inline-block " href="../auth/login" role="button">ログイン</a>
+                <a class="btn btn-success btn-lg d-inline-block" href="{{ url('register') }}" role="button">GivBookをはじめる</a><br>
+                <a class="btn btn-primary btn-lg d-inline-block " href="{{ url('login') }}" role="button">ログイン</a>
             </div>
         </div>
     </div>

@@ -29,7 +29,7 @@ const app = new Vue({
         chat:{
             message:[],
             user:[],
-            color:[]
+            color:[],
         }
     },
 

@@ -20,8 +20,6 @@ class SocialLiteController extends Controller
 
     public function callback()
     {
-        // $user = Socialite::driver('facebook')->user();
-        // dd($user);
         $auth_user = Socialite::driver('facebook')->stateless()->user();
  
         $user = User::updateOrCreate(

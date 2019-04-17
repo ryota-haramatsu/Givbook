@@ -28,7 +28,7 @@
                 :user = chat.user[index]
                 >
                     @{{ value }}
-        
+
                 </message>
             </ul>
             <input type="text" class="form-control" 
