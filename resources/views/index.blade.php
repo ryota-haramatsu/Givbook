@@ -41,7 +41,7 @@
                     <h5 class="card-title">{{ $book->title }}</h5>
                     <img class="card-img-top mt-2"  src="{{ url('storage/upload/'. $book->image) }}" alt="Card image cap">
                     <div class="card-body">
-                        <button class="button mb-3"><a href="">メッセージを送る</a></button>
+                        <button class="button mb-3"><a href="{{ route('chat') }}">メッセージを送る</a></button>
                         <h5>コメント</h5>
                         <p class="card-text">{{ $book->comment }}</p>
                     </div>

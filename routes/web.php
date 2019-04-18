@@ -25,9 +25,13 @@ Route::get('/', 'TopPagesController@index');
 Route::resource('books','BooksController');
 Route::resource('users','UsersController')->only(['show']);
 
-Route::get('chat','ChatController@chat');
-Route::post('send','ChatController@send');
-
+Route::get('chat','ChatController@chat')->name('chat');
+Route::post('send','ChatController@send')->name('send');
+Route::post('saveToSession','ChatController@saveToSession');
+Route::post('getOldMessage','ChatController@getOldMessage');
+Route::get('check',function(){
+    return session('chat');
+});
 
 
 

@@ -30,6 +30,17 @@ const app = new Vue({
             message:[],
             user:[],
             color:[],
+            time:[],
+        },
+        typing:'',
+        numberOfUsers:0
+    },
+    watch:{
+        message(){
+            Echo.private('chat')
+            .whisper('typing', {
+                name: this.message
+            });
         }
     },
 
@@ -39,9 +50,11 @@ const app = new Vue({
                 this.chat.message.push(this.message);
                 this.chat.color.push('success');
                 this.chat.user.push('you');
+                this.chat.time.push(this.getTime());
                 axios.post('/send', {
                     
-                    message : this.message
+                    message : this.message,
+                    chat:this.chat,
 
                   })
                   .then(response => {
@@ -53,7 +66,25 @@ const app = new Vue({
                   });
                 
             }
+        },
+        getTime(){
+            let time = new Date();
+            return time.getMonth()+1+'月'+time.getDate()+'日  '+time.getHours()+'時'+time.getMinutes()+'分';
+        },
+
+        getOldMessages() {
+            axios.post('/getOldMessage')
+                .then(response => {
+                    console.log(response);
+                    if (response.data != ''){
+                        this.chat = response.data;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
+
     },
 
     mounted() {
@@ -62,7 +93,23 @@ const app = new Vue({
                  this.chat.message.push(e.message);
                  this.chat.user.push(e.user);
                  this.chat.color.push('warning');
-                // console.log(e);
-    });
+                 this.chat.time.push(this.getTime());
+                 axios.post('/saveToSession',{
+                     chat:this.chat
+                 })
+                .then(response => {
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+                })
+
+            .listenForWhisper('typing', (e) => {
+                if(e.name != '') {
+                    this.typing = 'typing...'
+                }else{
+                    this.typing = ''
+                }
+        });
     }
 });
