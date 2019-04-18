@@ -17,12 +17,9 @@ class ChatController extends Controller
     }
 
     public function send(Request $request) {
-       
-
         $user = User::find(Auth::id());
         $this->saveToSession($request);
         event(new ChatEvent($request->message,$user));
-        //  return $request->all();
     }
     
     public function saveToSession(Request $request) {
@@ -33,4 +30,7 @@ class ChatController extends Controller
         return session('chat');
     }
 
+    public function deleteSession() {
+        session()->forget('chat');
+    }
 }

@@ -22,6 +22,7 @@
             <div class="badge badge-pill badge-primary">@{{ typing }}</div>
             <ul class="list-group" v-chat-scroll>
                 
+
                 <message
         
                 v-for="value,index in chat.message"
@@ -34,8 +35,17 @@
 
                 </message>
             </ul>
-            <input type="text" class="form-control" 
-                placeholder="メッセージを入力してください" v-model='message' @keyup.enter='send'>
+            <form @submit.prevent="send">
+                <div class="d-flex justify-content-start">
+                    <input type="text" class="form-control"  
+                        placeholder="メッセージを入力してください" v-model='message'>
+                    <input type="submit" class="btn btn-light btn-md border">
+                </div>
+            </form>
+            <br>
+            <!-- <a  href="" class="btn btn-warning btn-sm" @click='deleteSession'>ルームを削除する</a> -->
+        
+         <!-- <button @click='purge'>ルームを削除</button> -->
         </div>
     </div>
 </div>

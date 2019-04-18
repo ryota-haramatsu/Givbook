@@ -14237,8 +14237,19 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             Echo.private('chat').whisper('typing', {
                 name: this.message
             });
+        },
+
+        chat: {
+            handler: function handler() {
+                localStorage.setItem('chat', JSON.stringify(this.chat));
+            },
+            deep: true
         }
     },
+    // mounted() {
+
+    // },
+
 
     methods: {
         send: function send() {
@@ -14277,12 +14288,16 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        deleteSession: function deleteSession() {
+            axios.post('/deleteSession');
         }
     },
 
     mounted: function mounted() {
         var _this3 = this;
 
+        this.chat = JSON.parse(localStorage.getItem('chat'));
         Echo.private('chat').listen('ChatEvent', function (e) {
             _this3.chat.message.push(e.message);
             _this3.chat.user.push(e.user);
@@ -14290,12 +14305,15 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             _this3.chat.time.push(_this3.getTime());
             axios.post('/saveToSession', {
                 chat: _this3.chat
-            }).then(function (response) {}).catch(function (error) {
+            }).then(function (response) {
+                // console.log(response);
+                // this.chat = response.data;
+            }).catch(function (error) {
                 console.log(error);
             });
         }).listenForWhisper('typing', function (e) {
             if (e.name != '') {
-                _this3.typing = 'typing...';
+                _this3.typing = '書き込み中...';
             } else {
                 _this3.typing = '';
             }
@@ -14314,57 +14332,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 window._ = __webpack_require__(15);
 window.Popper = __webpack_require__(3).default;
 
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-
 try {
-  window.$ = window.jQuery = __webpack_require__(4);
+    window.$ = window.jQuery = __webpack_require__(4);
 
-  __webpack_require__(17);
+    __webpack_require__(17);
 } catch (e) {}
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
 
 window.axios = __webpack_require__(18);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-/**
- * Next we will register the CSRF Token as a common header with Axios so that
- * all outgoing HTTP requests automatically have it attached. This is just
- * a simple convenience so we don't have to attach every token manually.
- */
-
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-// import Pusher from "pusher-js"
 
 
 window.Pusher = __webpack_require__(38);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */]({
-  broadcaster: 'pusher',
-  key: '1dd393cad8306494778c',
-  cluster: 'ap3',
-  encrypted: true
+    broadcaster: 'pusher',
+    key: '1dd393cad8306494778c',
+    cluster: 'ap3',
+    encrypted: true
 });
 
 /***/ }),

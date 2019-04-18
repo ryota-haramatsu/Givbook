@@ -14,7 +14,7 @@
 // Route::get('/', function() {
 //     return view('welcome');
 // });
-Auth::routes();
+
 
 Route::get('/', 'TopPagesController@index');
 // Socialite
@@ -28,11 +28,13 @@ Route::resource('users','UsersController')->only(['show']);
 Route::get('chat','ChatController@chat')->name('chat');
 Route::post('send','ChatController@send')->name('send');
 Route::post('saveToSession','ChatController@saveToSession');
+Route::post('deleteSession','ChatController@deleteSession');
 Route::post('getOldMessage','ChatController@getOldMessage');
 Route::get('check',function(){
     return session('chat');
 });
 
+Auth::routes();
 
 
 

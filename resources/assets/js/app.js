@@ -41,8 +41,18 @@ const app = new Vue({
             .whisper('typing', {
                 name: this.message
             });
+        },
+        chat: {
+            handler: function() {
+                localStorage.setItem('chat', JSON.stringify(this.chat));
+            },
+            deep: true
         }
     },
+    // mounted() {
+       
+    // },
+    
 
     methods: {
         send() {
@@ -83,11 +93,22 @@ const app = new Vue({
                 .catch(error => {
                     console.log(error);
                 });
-        }
+        },
+        deleteSession() {
+                axios.post('/deleteSession');
+        },
+
+        // purge() {
+        //     if(!confirm('ルームを削除しますか？')) {
+        //         return;
+        //     }
+        //     this.chat = this.send;
+        // },
 
     },
 
     mounted() {
+        this.chat = JSON.parse(localStorage.getItem('chat'));
         Echo.private('chat')
              .listen('ChatEvent', (e) => {
                  this.chat.message.push(e.message);
@@ -98,6 +119,8 @@ const app = new Vue({
                      chat:this.chat
                  })
                 .then(response => {
+                    // console.log(response);
+                    // this.chat = response.data;
                 })
                 .catch(error => {
                     console.log(error);
@@ -106,7 +129,7 @@ const app = new Vue({
 
             .listenForWhisper('typing', (e) => {
                 if(e.name != '') {
-                    this.typing = 'typing...'
+                    this.typing = '書き込み中...'
                 }else{
                     this.typing = ''
                 }
