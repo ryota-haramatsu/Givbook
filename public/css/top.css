@@ -8,7 +8,7 @@ body {
  margin-bottom: 20px; 
 } */
 .top-img {
-    background:url(../img/book-2160539_960_720.png)center top/cover no-repeat; 
+    background:url('../img/book_bg.jpeg') center top/cover no-repeat; 
     max-width: 100%;
 }
 

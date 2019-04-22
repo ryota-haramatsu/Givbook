@@ -1,5 +1,5 @@
 
-<div class="container border mb-4 bg-light">
+<div class="container mb-4 bg-white">
     <form class="form-group" action="{{ route('books.store') }}" enctype="multipart/form-data" method="post">
         {{ csrf_field() }}
         <label for="">本のタイトル</label>
@@ -16,6 +16,6 @@
         </div>
         <br>
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-        <input type="submit"  value="登録する" class="btn btn-success rounded">
+        <input type="submit"  value="登録する" class="btn btn-dark border rounded">
     </form>
 </div>

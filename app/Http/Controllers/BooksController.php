@@ -26,13 +26,17 @@ class BooksController extends Controller
     
     public function index(Request $request)
     {
-        $books = Book::latest('created_at')->paginate(10);
+        $books = Book::latest('created_at')->paginate();
         $books->load('user');
+        $count = Book::count();
+
     
         $keyword = $request->input('keyword');
-        $results = Book::where('title','like','%'.$keyword.'%')->get();  
+        $results = Book::where('title','like','%'.$keyword.'%')->latest('created_at')->get();  
+        $results_count = Book::where('title','like','%'.$keyword.'%')->count();
         
-        return view('index')->with('books',$books)->with('keyword',$keyword)->with('results',$results);
+        return view('index')->with('books',$books)->with('keyword',$keyword)
+        ->with('results',$results)->with('count',$count)->with('results_count',$results_count);
     }
 
     /**
@@ -65,15 +69,17 @@ class BooksController extends Controller
 
        if ($request->file('image')->isValid()) {
            $book = new Book;
-        
+
            $book->title = $request->title;
            $book->comment = $request->comment;
-           $book->user_id = $request->user_id;
-           
+           $book->comment = mb_strimwidth($book->comment,0,100,'...','UTF-8');
+           $book->user_id = $request->user_id;           
+
            $time = Carbon::now();
            $filename = $request->file('image')->storeAs('public/upload',$time.'_'.Auth::user()->id . '.jpg');
 
            $book->image = basename($filename);
+
            $book->save();
        }
     

@@ -15,7 +15,7 @@
                 </ul>
             </div>
         @endif
-        <div class="container border mb-4 bg-light">
+        <div class="container mb-4 bg-white">
              <form class="form-group" action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
              {{ csrf_field() }}
              @method('PUT')

@@ -19,26 +19,59 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+  .chat {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .chat li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+  }
+
+  .chat li .chat-body p {
+    margin: 0;
+    color: #777777;
+  }
+
+  .panel-body {
+    overflow-y: scroll;
+    height: 350px;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+  }
+</style>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('books') }}">
                     GivBook
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon btn-lig"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav mr-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -48,30 +81,31 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('新規登録') }}</a>
                             </li>
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                    <a class="nav-link" href="/books/create">本の登録<span class="sr-only">(current)</span></a>
+                                    </li>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                    <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('users/'.Auth::id()) }}">ユーザー</a>
+                                    </li>
 
+                                    <a class="nav-link" href="#"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    ログアウト</a>
+                                    
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                </div>
-                            </li>
+                                </ul>
+                            </div>
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4 bg-white border border-white">
             @yield('content')
         </main>
     </div>

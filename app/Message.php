@@ -7,14 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     /**
- * Fields that are mass assignable
- *
- * @var array
- */
-protected $fillable = ['message'];
+     * Fields that are mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = ['message'];
 
-public function user()
-{
-    return $this->belongsTo(\App\User::class);
-}
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class);
+    }
+
+    public function book()
+    {
+        return $this->belongsTo(\App\Book::class,'book_id');
+    }
 }

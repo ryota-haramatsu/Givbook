@@ -48,10 +48,9 @@ class UsersController extends Controller
     {
         
         $user = User::findOrFail($id);
-        $books = Book::latest('created_at')->paginate(10);
-        // $count = Book::count();
+        $books = Book::latest('created_at');
         
-        return view('user', compact('user','books'));   
+        return view('user', compact('user','books','count'));   
     }
 
     /**

@@ -33,18 +33,18 @@ class User extends Authenticatable
     ];
 
 
-    public function addNew($input)
-    {
-        $check = static::where('facebook_id',$input['facebook_id'])->first();
+    // public function addNew($input)
+    // {
+    //     $check = static::where('facebook_id',$input['facebook_id'])->first();
 
 
-        if(is_null($check)){
-            return static::create($input);
-        }
+    //     if(is_null($check)){
+    //         return static::create($input);
+    //     }
 
 
-        return $check;
-    }
+    //     return $check;
+    // }
     public function books() 
     {
         return $this->hasMany(\App\Book::class, 'user_id');

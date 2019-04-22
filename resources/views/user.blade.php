@@ -4,7 +4,7 @@
     @include('navbar')
     <!-- 登録した本を編集、削除できる機能と一覧 -->
     <div class="text-right">ようこそ、{{ $user->name }}さん</div>
-    <h4>〜登録した本〜</h4>
+    <h4>登録した本</h4>
         <div class="container">
             <div class="row d-flex justify-content-md-start justify-content-center">
             @foreach($user->books as $book)
@@ -17,7 +17,7 @@
                          <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="d-inline">
                         @method('DELETE')
                         @csrf
-                        <input type="submit" value="&#xf2ed; 削除する" class="button fas d-flex" onclick='return confirm("削除していいんだね？もう一度聞くよ？いいんだね？");'>
+                        <input type="submit" value="&#xf2ed; 削除する" class="button fas d-flex" onclick='return confirm("本当に削除してもいいですか？");'>
                         </form>
                     </div>
                 </div>

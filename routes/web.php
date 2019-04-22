@@ -25,14 +25,11 @@ Route::get('/', 'TopPagesController@index');
 Route::resource('books','BooksController');
 Route::resource('users','UsersController')->only(['show']);
 
-Route::get('chat','ChatController@chat')->name('chat');
-Route::post('send','ChatController@send')->name('send');
-Route::post('saveToSession','ChatController@saveToSession');
-Route::post('deleteSession','ChatController@deleteSession');
-Route::post('getOldMessage','ChatController@getOldMessage');
-Route::get('check',function(){
-    return session('chat');
-});
+Route::get('chat', 'ChatsController@chat')->name('chat');
+// Route::get('books/{book}/chat', 'ChatsController@chat')->name('chat');
+
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
 
 Auth::routes();
 

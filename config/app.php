@@ -162,7 +162,7 @@ return [
         // Laravel\Socialite\SocialiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Pusher\Laravel\PusherServiceProvider::class,
+        // Pusher\Laravel\PusherServiceProvider::class,
         // Intervention\Image\ImageServiceProvider::class,
     ],
 
@@ -218,6 +218,9 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Pusher' => Pusher\Laravel\Facades\Pusher::class,
+        
+        // 'Pusher' => Pusher\Pusher::class,
+        
         // 'Image' => Intervention\Image\Facades\Image::class,
     ],
 
