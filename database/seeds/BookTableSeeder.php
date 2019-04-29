@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-class BooksTabelSeeder extends Seeder
+use Faker\Factory as Faker;
+use App\Book;
+class BookTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,8 +20,8 @@ class BooksTabelSeeder extends Seeder
             Book::create([
                 'title' => $faker->sentence(),
                 'comment' => $faker->paragraph(),
-                // 'image' => 
-            ]);
+                'image' =>  $faker->sentence()
+        ]);
     }
 }
 }

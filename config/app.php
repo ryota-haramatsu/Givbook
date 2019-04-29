@@ -162,6 +162,7 @@ return [
         // Laravel\Socialite\SocialiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+
         // Pusher\Laravel\PusherServiceProvider::class,
         // Intervention\Image\ImageServiceProvider::class,
     ],

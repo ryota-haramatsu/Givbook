@@ -13,10 +13,10 @@ class Book extends Model
         return $this->belongsTo(\App\User::class, 'user_id');
     }
 
-    // public function message()
-    // {
-    //     return $this->hasMany(\App\Message::class, 'book_id');
-    // }
+    public function message()
+    {
+        return $this->hasMany(\App\Message::class);
+    }
 
 
 }

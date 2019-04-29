@@ -3,8 +3,8 @@
 @section('content')
     @include('navbar')
     <div class="text-center">
-            <h1 class="h5">-本を登録する-</h1>
-
+        
+        <h2>-コメント欄-</h2>
         
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -15,7 +15,13 @@
                 </ul>
             </div>
         @endif
-
-    @include('form')
+        <div class="container mb-4 bg-white">
+            @foreach($messages as $message)
+            <div class=text-left>
+                <p>{{ $message->user->name }}：{{ $message->message }}</p>
+            </div>
+            @endforeach
+            
+        </div>
     </div>
 @endsection

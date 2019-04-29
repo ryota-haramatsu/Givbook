@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Book;
-use App\Http\Requests\BookRequest;
 use App\User;
+use App\Book;
+use App\Message;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class BooksController extends Controller
 {
@@ -24,17 +24,16 @@ class BooksController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function index(Request $request)
+    public function index(Request $request,Book $book)
     {
-        $books = Book::latest('created_at')->paginate();
+        $books = Book::latest('created_at')->get();
         $books->load('user');
-        $count = Book::count();
-
-    
         $keyword = $request->input('keyword');
+
         $results = Book::where('title','like','%'.$keyword.'%')->latest('created_at')->get();  
+        $count = Book::count();
         $results_count = Book::where('title','like','%'.$keyword.'%')->count();
-        
+
         return view('index')->with('books',$books)->with('keyword',$keyword)
         ->with('results',$results)->with('count',$count)->with('results_count',$results_count);
     }
@@ -47,7 +46,6 @@ class BooksController extends Controller
     
     public function create()
     {
-
         return view('create');
     }
 
@@ -65,21 +63,15 @@ class BooksController extends Controller
             'image' => 'required|file',
         ];
         $validated = $this->validate($request, $rules);  
- 
 
        if ($request->file('image')->isValid()) {
            $book = new Book;
-
            $book->title = $request->title;
            $book->comment = $request->comment;
-           $book->comment = mb_strimwidth($book->comment,0,100,'...','UTF-8');
            $book->user_id = $request->user_id;           
-
            $time = Carbon::now();
            $filename = $request->file('image')->storeAs('public/upload',$time.'_'.Auth::user()->id . '.jpg');
-
            $book->image = basename($filename);
-
            $book->save();
        }
     
@@ -93,15 +85,13 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        // $user = User::findOrFail($id);
-
-        // $count = Book::count();
+    public function show(Book $book)
+    {   
+        $book->load('user','message');
+        $book->message = Message::where('book_id', '=', $book->id )->orderBy('created_at','asc')->paginate(10);
         
-        // return view('user', compact('user','count'));   
+        return view('show')->with('book',$book);
     }
-
     /**
      * Show the form for editing the specified resource.
      *

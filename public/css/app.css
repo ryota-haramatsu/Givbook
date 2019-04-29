@@ -11652,3 +11652,60 @@ a.text-dark:focus {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+#pageTop {
+  position: fixed;
+  bottom: 0px;
+  right: 10px;
+}
+
+ 
+
+#pageTop i {
+  padding-top: 6px
+}
+
+ 
+
+#pageTop a {
+  display: block;
+  z-index: 999;
+  padding: 12px 7px 0 8px;
+  border-radius: 30px;
+  width: 45px;
+  height: 45px;
+  background-color: gray;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+}
+
+ 
+
+#pageTop a:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+
+
+.book_image:hover {
+  opacity: 0.7;
+  transition: 0.5s;
+  display:block;
+}
+
+.book_plus {
+  position:relative;
+  bottom:200px;
+  left:0px;
+  cursor:pointer;
+  opacity: 0.3;
+}
+
+.book_plus:hover {
+  z-index:1;
+  display:block;
+  opacity: 0.7;
+  transition: 0.5s;
+}

@@ -5,19 +5,19 @@ a:hover {
 }
 .button {
   display       : inline-block;
-  border-radius : 5%;          /* 角丸       */
-  font-size     : 14pt;        /* 文字サイズ */
-  text-align    : center;      /* 文字位置   */
-  cursor        : pointer;     /* カーソル   */
-  padding       : 12px 12px;   /* 余白       */
-  background    : #000066;     /* 背景色     */
-  color         : #ffffff;     /* 文字色     */
-  line-height   : 1em;         /* 1行の高さ  */
-  opacity       : 0.9;         /* 透明度     */
-  transition    : .3s;         /* なめらか変化 */
-  box-shadow    : 0px 6px 3px #666666;  /* 影の設定 */
+  border-radius : 5%;          
+  font-size     : 14pt;      
+  text-align    : center;     
+  cursor        : pointer;     
+  padding       : 12px 80px;   
+  background    : #000066;     
+  color         : #ffffff;     
+  line-height   : 1em;        
+  opacity       : 0.9;        
+  transition    : .3s;         
+  box-shadow    : 0px 6px 3px #666666; 
 }
 .button:hover {
-  box-shadow    : none;        /* カーソル時の影消去 */
-  opacity       : 1;           /* カーソル時透明度 */
+  box-shadow    : none;        
+  opacity       : 1;           
 }

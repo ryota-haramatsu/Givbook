@@ -8,7 +8,7 @@ body {
  margin-bottom: 20px; 
 } */
 .top-img {
-    background:url('../img/book_bg.jpeg') center top/cover no-repeat; 
+    background:url('../img/notebook-581128_960_720.jpg') center top/cover no-repeat; 
     max-width: 100%;
 }
 
@@ -17,7 +17,7 @@ body {
     font-size: 20px;
     font-family: helvetica;
     text-decoration: none;
-    border: 2px solid white;
+    border:none;
     border-radius: 20px;
     transition-duration: .2s;
     -webkit-transition-duration: .2s;
@@ -25,3 +25,21 @@ body {
     background-color: black;
     padding: 4px 30px;
 }
+
+
+#tategaki  {
+    font-family: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HGP明朝B', serif;
+    -webkit-font-feature-settings: 'pkna';
+            font-feature-settings: 'pkna';
+    font-size: 17px;
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+    -webkit-writing-mode: vertical-rl;
+        -ms-writing-mode: tb-rl;
+            writing-mode: vertical-rl;
+    text-indent: 1em;
+    padding: 0 3rem;
+  }
+  ruby {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo, "M+ 1p", sans-serif;
+  }

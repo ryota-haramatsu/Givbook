@@ -14,23 +14,16 @@
 // Route::get('/', function() {
 //     return view('welcome');
 // });
-
-
-Route::get('/', 'TopPagesController@index');
 // Socialite
 // Route::get('/auth/signin', 'Auth\SocialLiteController@signin');
 // Route::get('/auth/login', 'Auth\SocialLiteController@login');
 // Route::get('/auth/callback', 'Auth\SocialLiteController@callback');
 
-Route::resource('books','BooksController');
-Route::resource('users','UsersController')->only(['show']);
 
-Route::get('chat', 'ChatsController@chat')->name('chat');
-// Route::get('books/{book}/chat', 'ChatsController@chat')->name('chat');
-
-Route::get('messages', 'ChatsController@fetchMessages');
-Route::post('messages', 'ChatsController@sendMessage');
-
+Route::get('/', 'TopPagesController@index');
+Route::resource('books','BooksController')->middleware('auth');
+Route::resource('users','UsersController')->middleware('auth')->only(['show']);
+Route::resource('messages','MessageController')->middleware('auth');
 Auth::routes();
 
 
